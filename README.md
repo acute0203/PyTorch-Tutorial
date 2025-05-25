@@ -26,7 +26,7 @@
 
 ## 🔧 安裝環境
 
-建議使用 Python 3.8+ 搭配虛擬環境：
+建議使用 Python 3.11 搭配虛擬環境：
 
 ```bash
 python -m venv venv
