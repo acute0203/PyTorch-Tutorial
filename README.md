@@ -56,3 +56,9 @@ python ex1-seq_build.py
 ---
 
 歡迎用於課程教學、實驗設計與學生報告練習。
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).
