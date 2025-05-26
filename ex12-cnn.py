@@ -42,23 +42,38 @@ test_dataset = MNIST(root='./data', train=False, download=True, transform=transf
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-# CNN 模型定義
 class EnhancedCNN(nn.Module):
-    def __init__(self):
+    def __init__(self, input_channels=1, num_classes=10, input_size=(28, 28),
+                 kernel_size=3, padding=1, dropout_rate=0.3):
         super(EnhancedCNN, self).__init__()
-        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, padding=1)
+
+        # 可嘗試調整：kernel_size, padding, channel 數量
+        self.conv1 = nn.Conv2d(input_channels, 16, kernel_size=kernel_size, padding=padding)
         self.bn1 = nn.BatchNorm2d(16)
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv2d(16, 32, kernel_size=kernel_size, padding=padding)
         self.bn2 = nn.BatchNorm2d(32)
         self.pool = nn.MaxPool2d(2, 2)
-        self.dropout = nn.Dropout(0.3)
-        self.fc1 = nn.Linear(32 * 7 * 7, 128)
-        self.fc2 = nn.Linear(128, 10)
+
+        # 可嘗試調整 Dropout 機率（如 0.0~0.5）
+        self.dropout = nn.Dropout(dropout_rate)
+
+        # 自動推算 fc1 的輸入大小
+        self._flattened_size = self._get_flattened_size(input_size, input_channels)
+
+        self.fc1 = nn.Linear(self._flattened_size, 128)
+        self.fc2 = nn.Linear(128, num_classes)
+
+    def _get_flattened_size(self, input_size, input_channels):
+        with torch.no_grad():
+            dummy_input = torch.zeros(1, input_channels, input_size[0], input_size[1])
+            x = self.pool(F.relu(self.bn1(self.conv1(dummy_input))))
+            x = self.pool(F.relu(self.bn2(self.conv2(x))))
+            return x.view(1, -1).size(1)
 
     def forward(self, x):
         x = self.pool(F.relu(self.bn1(self.conv1(x))))
         x = self.pool(F.relu(self.bn2(self.conv2(x))))
-        x = x.view(-1, 32 * 7 * 7)
+        x = x.view(x.size(0), -1)
         x = self.dropout(F.relu(self.fc1(x)))
         x = self.fc2(x)
         return x

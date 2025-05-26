@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+'''
 # 使用 nn.Sequential 建立模型
 model = nn.Sequential(
     nn.Linear(10, 20),   # 輸入層 → 隱藏層
@@ -33,7 +33,7 @@ def init_weights(m):
 # 套用初始化
 # model.apply(fn)：會自動遞迴呼叫模型中的每一層（包含子模組
 model.apply(init_weights)
-'''
+
 
 # 建立輸入資料 (batch_size = 5, feature = 10)
 x = torch.randn(5, 10)

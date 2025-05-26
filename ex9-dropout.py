@@ -48,13 +48,14 @@ class IrisDataset(Dataset):
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
 
-# 學生可修改區
+# 可修改區
 loss_name = "cross_entropy"         # "cross_entropy" 或 "mse"
 optimizer_name = "adam"             # "sgd", "adam", "rmsprop", "adagrad"
 feed_mode = "dataloader"            # "full", "manual_batch", "dataloader", "single_sample"
 regularization_type = "l2"          # "none", "l1", "l2"
 regularization_strength = 1e-4
 dropout_rate = 0.3                  # 訓練時關閉比例
+
 batch_size = 16
 
 # 資料處理

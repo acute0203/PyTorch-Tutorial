@@ -44,6 +44,7 @@ model = models.resnet18(pretrained=True)
 
 # 凍結前面的參數（可選）
 for param in model.parameters():
+    # Q:把 requires_grad=False 拿掉，只凍結 conv1~conv4
     param.requires_grad = False
 
 # 替換最後一層為 CIFAR-10 分類（10 類）
