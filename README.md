@@ -20,6 +20,10 @@
 | `ex8-regularization.py` | 加入 L1 / L2 Regularization，學習模型正則化技巧 |
 | `ex9-dropout.py` | 模型中加入 Dropout，觀察對訓練影響 |
 | `ex10-BN.py` | 模型加入 Batch Normalization，觀察穩定訓練效果 |
+| `ex11-simple_cnn.py` | 建立基本 CNN 架構（2層 conv + pooling），理解影像分類流程 |
+| `ex12-cnn.py` | 完整 CNN 訓練流程，支援 Dropout、BatchNorm、Early Stopping 與模型儲存 |
+| `ex13-transfer_resnet.py` | 使用預訓練 ResNet18 進行 Transfer Learning，微調最後分類層 |
+| `ex14-w2v.py` | 示範如何載入並使用 Word2Vec 詞向量於 NLP 任務中（如文本分類） |
 | `requirements.txt` | 安裝相依套件清單（建議建立虛擬環境安裝） |
 
 ---
