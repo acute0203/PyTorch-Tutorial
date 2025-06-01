@@ -23,10 +23,10 @@ def get_device():
 device = get_device()
 
 class IrisNet(nn.Module):
-    def __init__(self, input_size=4, hidden_size=10, output_size=3):
+    def __init__(self, input_size=4, hidden_size=100, output_size=3):
         super(IrisNet, self).__init__()
         self.fc1 = nn.Linear(input_size, hidden_size)
-        self.relu = nn.ReLU()
+        self.relu = nn.PReLU()
         self.fc2 = nn.Linear(hidden_size, output_size)
 
     def forward(self, x):
@@ -47,7 +47,7 @@ class IrisDataset(Dataset):
 loss_name = "cross_entropy"         # "cross_entropy" 或 "mse"
 optimizer_name = "adam"             # "sgd", "adam", "rmsprop", "adagrad"
 feed_mode = "dataloader"         # "full", "manual_batch", "dataloader", "single_sample"
-batch_size = 16
+batch_size = 32
 
 # 資料處理
 iris = load_iris()
@@ -76,7 +76,7 @@ X_test, y_test = X_test.to(device), y_test.to(device)
 model = IrisNet().to(device)
 
 if optimizer_name == "sgd":
-    optimizer = optim.SGD(model.parameters(), lr=0.1)
+    optimizer = optim.SGD(model.parameters(), lr=0.01)
 elif optimizer_name == "adam":
     optimizer = optim.Adam(model.parameters(), lr=0.01)
 elif optimizer_name == "rmsprop":

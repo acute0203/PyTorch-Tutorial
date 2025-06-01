@@ -24,7 +24,6 @@ device = get_device()
 batch_size = 64
 num_epochs = 5
 learning_rate = 0.001
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # 資料預處理
 transform = transforms.Compose([

@@ -50,7 +50,7 @@ y_test_raw = torch.tensor(y_test, dtype=torch.long).to(device)
 
 # ---------- 可以修改：Loss 與 Optimizer ---------- #
 loss_name = "cross_entropy"   # 選擇： "cross_entropy" 或 "mse"
-optimizer_name = "adam"       # 選擇： "sgd", "adam", "rmsprop"
+optimizer_name = "sgd"       # 選擇： "sgd", "adam", "rmsprop", "adagrad"
 
 # ---------- 損失函數設定 ---------- #
 if loss_name == "cross_entropy":
@@ -69,7 +69,7 @@ model = IrisNet().to(device)
 
 # ---------- Optimizer 選擇 ---------- #
 if optimizer_name == "sgd":
-    optimizer = optim.SGD(model.parameters(), lr=0.1)
+    optimizer = optim.SGD(model.parameters(), lr=0.01)
 elif optimizer_name == "adam":
     optimizer = optim.Adam(model.parameters(), lr=0.01)
 elif optimizer_name == "rmsprop":

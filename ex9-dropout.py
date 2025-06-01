@@ -23,7 +23,7 @@ def get_device():
 device = get_device()
 
 class IrisNet(nn.Module):
-    def __init__(self, input_size=4, hidden_size=10, output_size=3, dropout_rate=0.0):
+    def __init__(self, input_size=4, hidden_size=3, output_size=3, dropout_rate=0.0):
         super(IrisNet, self).__init__()
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.relu = nn.ReLU()
@@ -54,7 +54,7 @@ optimizer_name = "adam"             # "sgd", "adam", "rmsprop", "adagrad"
 feed_mode = "dataloader"            # "full", "manual_batch", "dataloader", "single_sample"
 regularization_type = "l2"          # "none", "l1", "l2"
 regularization_strength = 1e-4
-dropout_rate = 0.3                  # 訓練時關閉比例
+dropout_rate = 0.5                 # 訓練時關閉比例
 
 batch_size = 16
 

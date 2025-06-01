@@ -49,7 +49,7 @@ y_train_raw = torch.tensor(y_train, dtype=torch.long).to(device)
 y_test_raw = torch.tensor(y_test, dtype=torch.long).to(device)
 
 # ---------- 選擇 Loss 函數 ---------- #
-loss_name = "mse"  # 可以改為 "mse"
+loss_name = "cross_entropy"  # 可以改為 "mse"
 
 if loss_name == "cross_entropy":
     criterion = nn.CrossEntropyLoss()
