@@ -106,3 +106,11 @@ plt.legend()
 plt.title("Sine Wave Prediction")
 plt.tight_layout()
 plt.show()
+
+'''
+1.改變 hidden_size
+2.嘗試用 cos 或其他週期函數取代 sin
+3.改變 seq_length，觀察模型預測表現
+4.換成 SGD、RMSprop、加入 Dropout
+5.嘗試加入 L1 或 L2 regularization
+'''

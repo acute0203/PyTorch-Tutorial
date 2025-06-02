@@ -118,3 +118,9 @@ plt.grid(True)
 
 plt.tight_layout()
 plt.show()
+
+'''
+1.調整 num_layers, hidden_size，觀察準確率變化
+2.修改 seq_length = 30 為 15, 60 等
+3.把 symbol = 'AAPL' 換成 TSLA, GOOG, BTC-USD 等其他資產
+'''

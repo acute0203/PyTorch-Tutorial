@@ -36,3 +36,9 @@ def tsne_plot(model, title):
 # 可視化
 tsne_plot(cbow_model, "CBOW Word2Vec t-SNE")
 tsne_plot(skipgram_model, "Skip-Gram Word2Vec t-SNE")
+
+'''
+1.調整 vector_size, window, epochs 看結果差異
+2.換自己的文本語料當訓練集
+https://dumps.wikimedia.org/
+'''

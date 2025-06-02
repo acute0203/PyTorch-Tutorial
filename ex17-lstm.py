@@ -118,3 +118,9 @@ plt.grid(True)
 
 plt.tight_layout()
 plt.show()
+
+'''
+1.嘗試修改 hidden_size, num_layers、或改用 GRU 模型。
+2.更換股票：改 symbol = 'TSLA' 或 'BTC-USD'
+3.改 seq_length = 10 或 60 比較模型表現
+'''

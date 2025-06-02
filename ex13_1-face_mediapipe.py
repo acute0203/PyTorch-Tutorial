@@ -51,3 +51,9 @@ with mp_face_detection.FaceDetection(
 # 釋放攝影機與關閉視窗
 cap.release()
 cv2.destroyAllWindows()
+
+'''
+練習建議：
+1. 嘗試調整 `min_detection_confidence` 的值，觀察效果
+2. 嘗試更換 `model_selection` 為 1，適合遠距影像
+'''
