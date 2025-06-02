@@ -9,7 +9,7 @@ import numpy as np
 import cv2
 import os
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 # === 1. 資料前處理與 CIFAR-10 載入 ===
 transform = transforms.Compose([
@@ -27,14 +27,15 @@ testloader = torch.utils.data.DataLoader(testset, batch_size=1, shuffle=False)
 model = resnet18(pretrained=False)
 model.fc = nn.Linear(model.fc.in_features, 10)
 model = model.to(device)
-
-# === 3. 簡單訓練一輪 ===
+'''
+# === 3. 簡單訓練10輪 ===
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 print("開始訓練...")
 model.train()
-for epoch in range(1):
+for epoch in range(10):
+    print(epoch)
     for inputs, labels in trainloader:
         inputs, labels = inputs.to(device), labels.to(device)
         optimizer.zero_grad()
@@ -43,7 +44,10 @@ for epoch in range(1):
         loss.backward()
         optimizer.step()
 print("訓練完成。")
-
+torch.save(model.state_dict(), "resnet18_weights.pth")
+'''
+model.load_state_dict(torch.load("resnet18_weights.pth", map_location=device))
+model.eval()  # 設定為評估模式
 # === 4. Grad-CAM 實作 ===
 class GradCAM:
     def __init__(self, model, target_layer):
@@ -76,14 +80,25 @@ class GradCAM:
 
 # === 5. 可視化 Grad-CAM 與原圖比較 ===
 def visualize_cam(img_tensor, mask, save_path=None):
-    img = img_tensor.squeeze().permute(1, 2, 0).detach().cpu().numpy()
-    img = (img - img.min()) / (img.max() - img.min())
+    import cv2
+    import numpy as np
+    import matplotlib.pyplot as plt
 
+    img = img_tensor.squeeze().permute(1, 2, 0).detach().cpu().numpy()  # [C, H, W] -> [H, W, C]
+    img = (img - img.min()) / (img.max() - img.min())  # normalize to 0-1
+
+    # === 修正：把 mask resize 到與 img 同樣大小 ===
+    mask = cv2.resize(mask, (img.shape[1], img.shape[0]))  # (W, H)
+
+    # === heatmap 視覺化處理 ===
     heatmap = cv2.applyColorMap(np.uint8(255 * mask), cv2.COLORMAP_JET)
-    heatmap = heatmap[..., ::-1] / 255.0
+    heatmap = heatmap[..., ::-1] / 255.0  # BGR -> RGB, normalize to 0~1
+
+    # === 疊圖 ===
     cam = heatmap * 0.4 + img * 0.6
     cam = np.clip(cam, 0, 1)
 
+    # === 顯示圖像 ===
     fig, axs = plt.subplots(1, 2, figsize=(10, 4))
     axs[0].imshow(img)
     axs[0].set_title("Original Image")
