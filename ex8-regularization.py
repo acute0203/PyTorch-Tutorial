@@ -47,7 +47,7 @@ class IrisDataset(Dataset):
 loss_name = "cross_entropy"         # "cross_entropy" 或 "mse"
 optimizer_name = "adam"             # "sgd", "adam", "rmsprop", "adagrad"
 feed_mode = "dataloader"            # "full", "manual_batch", "dataloader", "single_sample"
-regularization_type = "l2"          # "none", "l1", "l2"
+regularization_type = "l1"          # "none", "l1", "l2"
 regularization_strength = 1e-4
 batch_size = 16
 

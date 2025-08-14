@@ -148,6 +148,7 @@ for epoch in range(num_epochs):
             break
 
 # 畫圖
+print("train_loss_list:",len(train_loss_list))
 plt.figure(figsize=(12, 5))
 plt.subplot(1, 2, 1)
 plt.plot(train_loss_list, label='Train Loss')

@@ -50,7 +50,7 @@ y_test_raw = torch.tensor(y_test, dtype=torch.long).to(device)
 
 # ---------- 可以修改：Loss 與 Optimizer ---------- #
 loss_name = "cross_entropy"   # 選擇： "cross_entropy" 或 "mse"
-optimizer_name = "sgd"       # 選擇： "sgd", "adam", "rmsprop", "adagrad"
+optimizer_name = "rmsprop"       # 選擇： "sgd", "adam", "rmsprop", "adagrad"
 
 # ---------- 損失函數設定 ---------- #
 if loss_name == "cross_entropy":
