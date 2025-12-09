@@ -23,7 +23,16 @@
 | `ex11-simple_cnn.py` | 建立基本 CNN 架構（2層 conv + pooling），理解影像分類流程 |
 | `ex12-cnn.py` | 完整 CNN 訓練流程，支援 Dropout、BatchNorm、Early Stopping 與模型儲存 |
 | `ex13-transfer_resnet.py` | 使用預訓練 ResNet18 進行 Transfer Learning，微調最後分類層 |
+| `ex13_0-GradCam.py` | Grad-CAM 視覺化實作，觀察 CNN 模型關注的影像區域熱力圖 |
+| `ex13_1-face_mediapipe.py` | 使用 MediaPipe 進行即時人臉偵測（攝影機串流） |
+| `ex13_2-ges_mediapipe.py` | 使用 MediaPipe 進行手勢辨識（比讚、愛心、數字 1-5） |
 | `ex14-w2v.py` | 示範如何載入並使用 Word2Vec 詞向量於 NLP 任務中（如文本分類） |
+| `ex15-rnn.py` | 基礎 RNN 模型，使用 Sine Wave 時間序列預測 |
+| `ex16-stack_rnn.py` | 堆疊式 RNN 預測股價（AAPL），比較直接預測與差分預測方法 |
+| `ex17-lstm.py` | LSTM 模型預測股價（AAPL），學習長短期記憶網路架構 |
+| `ex18-lstm_midi_generator.py` | LSTM 音樂生成器，讀取 MIDI 檔案訓練並自動作曲（需下載 MAESTRO 資料集） |
+| `ex19-transformer.py` | Transformer 模型預測加密貨幣價格（ETH-USD） |
+| `ex20-gan.py` | GAN 生成對抗網路，使用 MNIST 資料集生成手寫數字圖像 |
 | `requirements.txt` | 安裝相依套件清單（建議建立虛擬環境安裝） |
 
 ---
@@ -52,10 +61,42 @@ python ex1-seq_build.py
 
 ## 🎓 推薦學習順序
 
-1. `ex1-seq_build.py` → `ex2-class_build.py`：模型建立方式
-2. `ex3` ~ `ex6`：基本訓練流程、損失與優化器選擇
+### 基礎篇
+1. `ex1` → `ex2`：模型建立方式（Sequential vs Class）
+2. `ex3` ~ `ex6`：基本訓練流程、損失函數與優化器選擇
 3. `ex7`：餵資料方式理解
-4. `ex8` ~ `ex10`：正則化與訓練穩定技巧
+4. `ex8` ~ `ex10`：正則化與訓練穩定技巧（L1/L2、Dropout、BatchNorm）
+
+### 影像處理篇
+5. `ex11` → `ex12`：CNN 卷積神經網路從簡單到完整
+6. `ex13`：Transfer Learning 遷移學習
+7. `ex13_0`：Grad-CAM 模型可解釋性視覺化
+8. `ex13_1` → `ex13_2`：MediaPipe 人臉/手勢偵測應用
+
+### 序列模型篇
+9. `ex14`：Word2Vec 詞向量應用
+10. `ex15` → `ex16`：RNN 基礎與堆疊式 RNN
+11. `ex17` → `ex18`：LSTM 股價預測與音樂生成
+12. `ex19`：Transformer 架構入門
+
+### 生成模型篇
+13. `ex20`：GAN 生成對抗網路
+
+---
+
+## 📦 額外資料集下載
+
+### MAESTRO 資料集（ex18 音樂生成用）
+
+`ex18-lstm_midi_generator.py` 需要 MAESTRO 鋼琴 MIDI 資料集：
+
+1. 前往 [MAESTRO Dataset](https://magenta.tensorflow.org/datasets/maestro) 下載
+2. 或使用指令下載：
+   ```bash
+   wget https://storage.googleapis.com/magentadata/datasets/maestro/v3.0.0/maestro-v3.0.0-midi.zip
+   unzip maestro-v3.0.0-midi.zip
+   ```
+3. 解壓後將 `maestro-v3.0.0` 資料夾放在專案根目錄
 
 ---
 
